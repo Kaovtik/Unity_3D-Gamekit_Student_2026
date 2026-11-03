@@ -1,9 +1,11 @@
+using Gamekit3D;
 using UnityEngine;
 
 public class SurvivalMod : MonoBehaviour
 {
     [SerializeField] private float thirstLevel = 100f;
     [SerializeField] private float thirstSpeed;
+    [SerializeField] private float timer = 10f;
 
     [SerializeField] private bool thirsty;
     [SerializeField] private bool parched;
@@ -46,9 +48,25 @@ public class SurvivalMod : MonoBehaviour
             parched = false;
         }
         
+        //if statement checks if thirstLevel is equal to, or lower, than 0 AND if parched = true
         if (thirstLevel <= 0 && parched)
         {
-            Debug.Log(message:"Damage by thirst!");
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                Damageable.DamageMessage msg = new Damageable.DamageMessage()
+                {
+                    amount = 1,
+                    damager = this,
+                    damageSource = new Vector3(x: 0, y: 0, z: 0),
+                    direction = new Vector3(0, y: 0, z: 0),
+                    throwing = false,
+                    stopCamera = false
+                };
+                playerObject.GetComponent<Damageable>().ApplyDamage(msg);
+                Debug.Log(message: "Damage by thirst!");
+                timer = 10f;
+            }
         }
     }
 }
