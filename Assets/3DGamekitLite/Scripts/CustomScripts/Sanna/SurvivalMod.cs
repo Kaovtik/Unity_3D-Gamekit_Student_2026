@@ -1,6 +1,5 @@
 using Gamekit3D;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class SurvivalMod : MonoBehaviour
 {
@@ -77,7 +76,7 @@ public class SurvivalMod : MonoBehaviour
         playerObject.GetComponent<Damageable>().ApplyDamage(msg);
         Debug.Log(message: "Damage by thirst!");
     }
-
+    
     public void AddWater()
     {
         Debug.Log("Added random water!");
