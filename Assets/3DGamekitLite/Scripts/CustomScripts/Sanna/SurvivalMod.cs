@@ -1,5 +1,6 @@
 using Gamekit3D;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SurvivalMod : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class SurvivalMod : MonoBehaviour
 
     [SerializeField] private bool thirsty;
     [SerializeField] private bool parched;
+
+    public int waterBottles = 0;
 
     [SerializeField] private GameObject playerObject;
     
@@ -54,19 +57,30 @@ public class SurvivalMod : MonoBehaviour
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                Damageable.DamageMessage msg = new Damageable.DamageMessage()
-                {
-                    amount = 1,
-                    damager = this,
-                    damageSource = new Vector3(x: 0, y: 0, z: 0),
-                    direction = new Vector3(0, y: 0, z: 0),
-                    throwing = false,
-                    stopCamera = false
-                };
-                playerObject.GetComponent<Damageable>().ApplyDamage(msg);
-                Debug.Log(message: "Damage by thirst!");
-                timer = 10f;
+               ThirstDamage();
+               timer = 10f;
             }
         }
+    }
+    
+    private void ThirstDamage()
+    {
+        Damageable.DamageMessage msg = new Damageable.DamageMessage()
+        {
+            amount = 1,
+            damager = this,
+            damageSource = new Vector3(x: 0, y: 0, z: 0),
+            direction = new Vector3(0, y: 0, z: 0),
+            throwing = false,
+            stopCamera = false
+        };
+        playerObject.GetComponent<Damageable>().ApplyDamage(msg);
+        Debug.Log(message: "Damage by thirst!");
+    }
+
+    public void AddWater()
+    {
+        Debug.Log("Added random water!");
+        waterBottles++;
     }
 }
