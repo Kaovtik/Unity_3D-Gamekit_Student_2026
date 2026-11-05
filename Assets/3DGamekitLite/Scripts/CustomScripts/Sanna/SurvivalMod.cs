@@ -89,4 +89,12 @@ public class SurvivalMod : MonoBehaviour
         Debug.Log("Added random water!");
         waterBottles += Random.Range(0, 6);
     }
+    
+    public void ResetThirst()
+    {
+        Debug.Log("Thirst Reset");
+        thirstLevel = 100f;
+        waterBottles = 0;
+        timer = 10f;
+    }
 }
