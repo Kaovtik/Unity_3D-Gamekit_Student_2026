@@ -10,7 +10,7 @@ public class SurvivalMod : MonoBehaviour
     [SerializeField] private bool thirsty;
     [SerializeField] private bool parched;
 
-    public int waterBottles = 0;
+    [SerializeField] private int waterBottles = 0;
 
     [SerializeField] private GameObject playerObject;
     
@@ -60,6 +60,13 @@ public class SurvivalMod : MonoBehaviour
                timer = 10f;
             }
         }
+        
+        //if statement for drinking water, but only when the player has one or more water bottles
+        if (Input.GetKeyDown(KeyCode.LeftShift) && waterBottles >= 1)
+        {
+            waterBottles--;
+            thirstLevel += 10f;
+        }
     }
     
     private void ThirstDamage()
@@ -80,6 +87,6 @@ public class SurvivalMod : MonoBehaviour
     public void AddWater()
     {
         Debug.Log("Added random water!");
-        waterBottles++;
+        waterBottles += Random.Range(0, 6);
     }
 }
