@@ -68,7 +68,7 @@ public class SurvivalMod : MonoBehaviour
             thirstLevel += 10f;
         }
     }
-    
+     
     private void ThirstDamage()
     {
         Damageable.DamageMessage msg = new Damageable.DamageMessage()
